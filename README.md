@@ -26,7 +26,7 @@ Existem alguns problemas clássicos resolvidos com esta heurísticas, como o pro
 ### Solução inicial
 <div align="center">
     <img src="./img/GrafoDePrioridades.png" alt="Grafo De Prioridades">
-    <p>Figura 1 - Grafo De Prioridades</p>
+    <figcaption>Figura 1 - Grafo De Prioridades</figcaption>
 </div>
 
 A Figura 1 mostra um grafo de prioridades, representando a ordem de execução das tarefas, onde cada número corresponde a uma tarefa e as arestas indicam precedência. Cada número representa uma tarefa e cada tarefa tem um custo atribuído a ela. Por enquanto, quero falar sobre a ordem de precedência: nenhuma tarefa pode ser concluída se sua antecessora não foi finalizada. Vamos considerar que começamos agora. Temos o elemento 2, que tem um antecessor. Enquanto ele não for concluído, a tarefa 2 não pode ser finalizada, e assim sucessivamente até chegar a um conjunto solução.
@@ -35,14 +35,14 @@ Assim, chegamos a uma solução inicial viável: [1, 2, 3, 4, 8, 6, 7, 9, 5]
 
 <div align="center">
     <img src="./img/GrafoDePrioridadesComCusto.png" alt="Grafo De Prioridades com custo">
-    <p>Figura 2 - Grafo De Prioridades com custo</p>
+    <figcaption>Figura 2 - Grafo De Prioridades com custo</figcaption>
 </div>
 
 Aqui estão as tarefas, que são as mesmas do grafo anterior, mas com a representação do custo de cada elemento. Cada tarefa tem seu custo, representando sua função objetivo (FO) de 42, sendo este o custo total para a execução dessas tarefas. No entanto, ainda dividiremos as tarefas em várias máquinas, pois estamos lidando com uma linha de produção.
 
 <div align="center">
     <img src="./img/LinhaDeMontagem.png" alt="Linha De Montagem">
-    <p>Figura 3 - Linha De Montagem</p>
+    <figcaption>Figura 3 - Linha De Montagem</figcaption>
 </div>
 
 Visualizando a imagem, podemos ter uma noção de que cada operador será atribuído a uma certa quantidade de tarefas. Inicialmente, queremos melhorar a função objetivo (FO) atribuindo quantidades iguais de tarefas para cada um dos operadores.

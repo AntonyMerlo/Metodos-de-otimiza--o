@@ -1,5 +1,5 @@
 import copy
-from .CalculaFo import Fo
+from ..CalculaFo import Fo
 
 # Verifica se o Fo melhorou
 def verificarMelhora(maquina, resultado, custo):

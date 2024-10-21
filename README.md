@@ -81,9 +81,3 @@ Após fazermos um refinamento usando a política de vizinhança, obtemos um valo
 
 A política de vizinhança implementada consiste em mover o último elemento, removendo-o da lista e alocando-o na primeira posição da lista inferior, e também fazendo o caminho contrário, sempre buscando o melhor valor possível para a função objetivo (FO).
 
-## Em implementação
-
-- Implementação de uma Meta-heurística por busca tabu.
-    - Tera modificações da estrutura de vizinhança.
-    - Implementação da busca tabu.
-    - Usar a busca tabu para refinar.

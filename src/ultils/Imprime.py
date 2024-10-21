@@ -15,29 +15,30 @@ def imprimeMatriz(matriz):
 def formataMaquina(maquina, maquinaRefinada, custo, inicio):
     maquinaText = f"\nQuantidade de maquinas: {len(maquina)}\n\n"
     
-    # Encontra o maior comprimento de string na primeira coluna
-    maxLen = max(len(f"Maquina normal: {str(maquina[i])}") for i in range(len(maquina)))
-    
+    # Calcula o maior comprimento de todas as colunas em todas as linhas
+    maxLenNormal = max(len(f"Maquina normal: {str(maquina[i])}") for i in range(len(maquina)))
+    maxLenRefinada = max(len(f"Maquina refinada: {str(maquinaRefinada[i])}") for i in range(len(maquina)))
+
+    # Para cada máquina, alinhar os textos com base nos maiores comprimentos calculados
     for i in range(len(maquina)):
         normalText = f"Maquina normal: {str(maquina[i])}"
         refinadaText = f"Maquina refinada: {str(maquinaRefinada[i])}"
         
-        # Alinha as colunas com ljust
-        maquinaText += f"{normalText.ljust(maxLen)} \t {refinadaText}\n"
+        # Alinha as colunas com base nos maiores comprimentos globais
+        maquinaText += f"{normalText.ljust(maxLenNormal)}\t{refinadaText.ljust(maxLenRefinada)}\n"
 
-    #Calcula Fo
+    # Calcula Fo
     foInicial = f"Fo: {str(Fo(maquina, custo))}"
     foRefinado = f"Fo: {str(Fo(maquinaRefinada, custo))}"
-
     # Marca o fim para calcular o tempo
     fim = time.perf_counter()
 
-    # Alinha o texto do Fo como as colunas anteriores
-    maquinaText += f"\n{foInicial.ljust(maxLen)} \t {foRefinado}\n"
-    maquinaText += f"Tempo de execucao em milissegundos: {((fim - inicio)*1000):.2f}"
+    # Alinha o texto do Fo como as colunas anteriores, com base no maior comprimento das colunas de máquinas
+    maquinaText += f"\n{foInicial.ljust(maxLenNormal)}\t{foRefinado.ljust(maxLenRefinada)}\n"
+    
+    maquinaText += f"Tempo de execucao em milissegundos: {((fim - inicio) * 1000):.2f} ms"
 
     return maquinaText
-
 
 
 def imprimeMaquinas(maquina, maquinaRefinada, custo, inicio):

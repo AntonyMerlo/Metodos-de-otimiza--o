@@ -4,52 +4,49 @@ Este projeto implementa métodos de otimização para resolver problemas prátic
 
 ## Introdução
 
-Neste trabalho, está sendo usado uma heurística gulosa para obter uma solução do problema, onde podemos compreender para chegar em uma solução inicial. O objetivo é mostrar como é possível chegar a uma solução viável que, posteriormente, poderá ser refinada.
+Neste trabalho, utilizamos uma heurística gulosa para obter uma solução inicial para o problema. O objetivo é mostrar como é possível chegar a uma solução viável que, posteriormente, pode ser refinada.
 
-## Conteúdo 
-### Heurística gulosa
+## Conteúdo
 
-A heurística gulosa é uma abordagem onde vamos pegar elementos candidatos para inserção dele no conjunto solução da seguinte forma:
+### Heurística Gulosa
 
-- Conjunto candidato: Conjunto extraído dos arquivos dentro do data, que usaremos para criar a solução do problema.
+A heurística gulosa é uma abordagem onde selecionamos elementos candidatos para inserção no conjunto solução da seguinte forma:
+- **Conjunto Candidato**: Conjunto extraído dos arquivos dentro do diretório `data`, usado para criar a solução do problema.
+- **Seleção**: Selecionamos um elemento e verificamos sua viabilidade.
+- **Viabilidade**: Verificamos se o elemento não fere suas precedências para entrar no conjunto solução.
+- **Função Objetivo (FO)**: Atribuímos um valor de custo para a solução.
+- **Solução**: Uma solução viável para o problema.
 
-- Seleção: Selecionamos um elemento e checamos a viabilidade dele.
+Problemas clássicos resolvidos com esta heurística incluem o problema da mochila, onde o objetivo é maximizar o valor dos itens colocados em uma mochila de tamanho limitado.
 
-- Viabilidade: Verificar se o elemento não fere suas precedências para entrar no conjunto solução.
-
-- Função objetivo(FO): Atribuímos um valor de custo para a solução.
-
-- Solução: Uma solução viável para o problema.
-
-Existem alguns problemas clássicos resolvidos com esta heurísticas, como o problema da mochila, onde o objetivo é maximizar o valor dos objetos colocados em uma mochila. No entanto, a mochila tem tamanho limitado, então você precisa selecionar quais itens levara para maximizar o valor.
-
-### Solução inicial
-<div align="center">
-    <img src="./img/GrafoDePrioridades.png" alt="Grafo De Prioridades">
-    <figcaption>Figura 1 - Grafo De Prioridades</figcaption>
-</div>
-
-A Figura 1 mostra um grafo de prioridades, representando a ordem de execução das tarefas, onde cada número corresponde a uma tarefa e as arestas indicam precedência. Cada número representa uma tarefa e cada tarefa tem um custo atribuído a ela. Por enquanto, quero falar sobre a ordem de precedência: nenhuma tarefa pode ser concluída se sua antecessora não foi finalizada. Vamos considerar que começamos agora. Temos o elemento 2, que tem um antecessor. Enquanto ele não for concluído, a tarefa 2 não pode ser finalizada, e assim sucessivamente até chegar a um conjunto solução.
-
-Assim, chegamos a uma solução inicial viável: [1, 2, 3, 4, 8, 6, 7, 9, 5]
+### Solução Inicial
 
 <div align="center">
-    <img src="./img/GrafoDePrioridadesComCusto.png" alt="Grafo De Prioridades com custo">
-    <figcaption>Figura 2 - Grafo De Prioridades com custo</figcaption>
+    <img src="./img/GrafoDePrioridades.png" alt="Grafo de Prioridades">
+    <br>
+    <figcaption>Figura 1 - Grafo de Prioridades</figcaption>
 </div>
 
-Aqui estão as tarefas, que são as mesmas do grafo anterior, mas com a representação do custo de cada elemento. Cada tarefa tem seu custo, representando sua função objetivo (FO) de 42, sendo este o custo total para a execução dessas tarefas. No entanto, ainda dividiremos as tarefas em várias máquinas, pois estamos lidando com uma linha de produção.
+A Figura 1 mostra um grafo de prioridades, representando a ordem de execução das tarefas, onde cada número corresponde a uma tarefa e as arestas indicam precedência. Cada tarefa tem um custo atribuído a ela, e nenhuma tarefa pode ser concluída se sua antecessora não for finalizada.
+
+Solução inicial viável: `[1, 2, 3, 4, 8, 6, 7, 9, 5]`
 
 <div align="center">
-    <img src="./img/LinhaDeMontagem.png" alt="Linha De Montagem">
-    <figcaption>Figura 3 - Linha De Montagem</figcaption>
+    <img src="./img/GrafoDePrioridadesComCusto.png" alt="Grafo de Prioridades com Custo">
+    <br>
+    <figcaption>Figura 2 - Grafo de Prioridades com Custo</figcaption>
 </div>
 
-Visualizando a imagem, podemos ter uma noção de que cada operador será atribuído a uma certa quantidade de tarefas. Inicialmente, queremos melhorar a função objetivo (FO) atribuindo quantidades iguais de tarefas para cada um dos operadores.
+A Figura 2 mostra o mesmo grafo, mas com o custo de cada tarefa. O custo total para a execução das tarefas é 42. Dividimos as tarefas em várias máquinas, simulando uma linha de produção.
 
-#### Representação de maquinas:
+<div align="center">
+    <img src="./img/LinhaDeMontagem.png" alt="Linha de Montagem">
+    <br>
+    <figcaption>Figura 3 - Linha de Montagem</figcaption>
+</div>
 
-
+Cada operador é atribuído a um conjunto de tarefas. Queremos melhorar a Função Objetivo (FO) atribuindo tarefas de maneira equilibrada entre os operadores.
+#### Representação de Máquinas:
 ##### Maquina não refinada:
 ```
 Quantidade de maquinas: 5
@@ -62,7 +59,7 @@ Maquina normal: [5]
 
 Fo: 12
 ```
-Aqui, inicialmente, temos uma solução onde o problema na linha de produção é resolvido. A função objetivo (FO) é calculada de forma um pouco diferente, considerando o custo mais alto entre todas as máquinas.
+A função objetivo (FO) é calculada considerando o custo mais alto entre todas as máquinas.
 
 ##### Maquina refinada:
 ```
@@ -77,7 +74,6 @@ Maquina refinada: [5]
 Fo: 11
 
 ```
-Após fazermos um refinamento usando a política de vizinhança, obtemos um valor melhor. Embora a diferença seja pequena, há uma melhora no elemento ao considerar a solução inicial.
+Após refinamento usando a política de vizinhança, obtivemos um valor melhor, mostrando uma melhora na solução inicial.
 
-A política de vizinhança implementada consiste em mover o último elemento, removendo-o da lista e alocando-o na primeira posição da lista inferior, e também fazendo o caminho contrário, sempre buscando o melhor valor possível para a função objetivo (FO).
-
+A política de vizinhança consiste em mover o último elemento, removendo-o da lista e alocando-o na primeira posição da lista inferior, e também fazendo o caminho contrário, sempre buscando o melhor valor possível para a função objetivo (FO).
